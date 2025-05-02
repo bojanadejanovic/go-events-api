@@ -1,0 +1,54 @@
+### Get all events
+GET http://localhost:8080/events 
+Content-Type: application/json
+
+
+### Create a new event
+POST http://localhost:8080/events 
+Content-Type: application/json
+
+{
+  "name": "Test 111",
+  "description": "Test test 11",
+  "date_time": "2025-05-01T11:00:00Z",
+  "location": "Sala 1"
+}
+
+
+### Get event by id
+GET http://localhost:8080/events/2
+Content-Type: application/json
+
+### Update an event
+PUT http://localhost:8080/events/2
+Content-Type: application/json
+
+{
+  "name": "Meditacija",
+  "description": "Meditacija",
+  "date_time": "2025-04-30T11:00:00Z",
+  "location": "Sala 2"
+}
+
+### Delete an event
+DELETE http://localhost:8080/events/81
+Content-Type: application/json
+
+
+### sign up user
+POST http://localhost:8080/signup
+Content-Type: application/json
+
+{
+  "email": "test@bojana.com",
+  "password": "test123"
+}
+
+### login user
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "test@bojana.com",
+  "password": "test123"
+}
