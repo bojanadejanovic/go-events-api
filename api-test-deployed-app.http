@@ -1,0 +1,45 @@
+
+### get events
+GET https://go-events.bitsandpieces.cloud/events
+
+### get event by id
+GET https://go-events.bitsandpieces.cloud/events/1
+
+### create event
+POST https://go-events.bitsandpieces.cloud/events
+
+{
+  "name": "Vjezbe",
+  "description": "Vjezbe",
+  "date_time": "2025-05-02T11:00:00Z",
+  "location": "Sala 1"
+}
+
+### Update event
+PUT https://go-events.bitsandpieces.cloud/events/1
+
+{
+  "name": "Meditacija",
+  "description": "Meditacija",
+  "date_time": "2025-04-30T11:00:00Z",
+  "location": "Sala 2"
+}
+
+### Delete event
+DELETE https://go-events.bitsandpieces.cloud/events/1
+
+### signup
+POST https://go-events.bitsandpieces.cloud/signup
+
+{
+  "email": "bojana@bitcraft.ing",
+  "password": "Sof1st1c1r4n!"
+}
+
+### login
+POST https://go-events.bitsandpieces.cloud/login
+
+{
+  "email": "bojana@bitcraft.ing",
+  "password": "Sof1st1c1r4n!"
+}
