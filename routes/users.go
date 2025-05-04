@@ -49,5 +49,11 @@ func login(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"message": "Login successful", "token": token})
+	login, err := models.SaveLogin(user.ID, token)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to save login"})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": "Login successful", "token": token, "login_id": login.ID})
 }

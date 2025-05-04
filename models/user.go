@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"bojana.dev/api/db"
 	"bojana.dev/api/utils"
@@ -12,6 +13,37 @@ type User struct {
 	ID       int64  `json:"id"`
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required,min=6"`
+}
+
+type Login struct {
+	ID     int64 `json:"id"`
+	UserID int64 `json:"user_id"`
+}
+
+func SaveLogin(userID int64, token string) (*Login, error) {
+	query := `INSERT INTO logins(user_id, token, created_at) VALUES (?, ?, ?)`
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+	hashedToken := utils.HashToken(token)
+	result, err := stmt.Exec(userID, hashedToken, time.Now())
+	if err != nil {
+		return nil, err
+	}
+
+	lastInsertId, err := result.LastInsertId()
+	if err != nil {
+		return nil, err
+	}
+
+	login := &Login{
+		ID:     lastInsertId,
+		UserID: userID,
+	}
+
+	return login, nil
 }
 
 func (u User) Save() error {

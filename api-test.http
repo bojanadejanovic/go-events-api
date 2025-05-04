@@ -1,5 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjM1OTEwMywidXNlcklEIjoxfQ.P0ViPG9wSVsVjnSN6Raow9zo_nQMBhsItiqEM8d7Rz8
-
+@token = ""
 
 ### Get all events
 GET http://localhost:8080/events 
@@ -45,7 +44,7 @@ POST http://localhost:8080/signup
 Content-Type: application/json
 
 {
-  "email": "bojana@test.com",
+  "email": "bojanatest@test.com",
   "password": "test123"
 }
 
@@ -54,7 +53,7 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email": "bojana@test.com",
+  "email": "bojanatest@test.com",
   "password": "test123"
 }
 
@@ -69,6 +68,6 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NjU2NCwidXNlcklEIjoxfQ.4pCMEEOpO8IDYY3hslWthQ1A77ehYlKLwoFwox731jY
 
 ### get registered users
-GET http://localhost:8080/events/6/registered
+GET http://localhost:8080/events/8/registered
 Content-Type: application/json
 Authorization: Bearer {{token}}

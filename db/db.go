@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -61,8 +62,68 @@ func createTables() {
 		FOREIGN KEY(user_id) REFERENCES users(id)
 	)`
 
+	createLoginsTable := `
+	CREATE TABLE IF NOT EXISTS logins (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		user_id INTEGER,
+		token TEXT NOT NULL,
+		created_at DATETIME NOT NULL,
+		expires_at DATETIME NOT NULL,
+		FOREIGN KEY(user_id) REFERENCES users(id)
+	)`
+
 	_, err = DB.Exec(createRegistrationsTable)
 	if err != nil {
 		panic("Could not create registrations table: " + err.Error())
 	}
+
+	_, err = DB.Exec(createLoginsTable)
+	if err != nil {
+		panic("Could not create logins table: " + err.Error())
+	}
+}
+
+func IsUserLoggedIn(userID int64) (bool, error) {
+	query := `
+		SELECT token, expires_at 
+		FROM logins 
+		WHERE user_id = ? 
+		ORDER BY created_at DESC 
+		LIMIT 1`
+
+	var token string
+	var expiresAt time.Time
+	err := DB.QueryRow(query, userID).Scan(&token, &expiresAt)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return false, nil
+		}
+		return false, err
+	}
+
+	// Check if token is expired
+	if time.Now().After(expiresAt) {
+		// Token is expired, perform logout
+		if err := LogoutUser(userID); err != nil {
+			return false, err
+		}
+		return false, nil
+	}
+
+	return true, nil
+}
+
+func LogoutUser(userID int64) error {
+	query := `DELETE FROM logins WHERE user_id = ?`
+	_, err := DB.Exec(query, userID)
+	return err
+}
+
+func LoginUser(userID int64, token string, expiresAt time.Time) error {
+	query := `
+		INSERT INTO logins (user_id, token, created_at, expires_at)
+		VALUES (?, ?, datetime('now'), ?)`
+
+	_, err := DB.Exec(query, userID, token, expiresAt)
+	return err
 }

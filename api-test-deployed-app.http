@@ -1,6 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUBiaXRjcmFmdC5pbmciLCJleHAiOjE3NDYzNTgxODcsInVzZXJJRCI6M30.kah4i4FgHMSMQmc1bL8EZZkj8uTH3DP5ShcIAB8bwxc
-
-
+@token = ""
 ### get events
 GET https://go-events.bitsandpieces.cloud/events
 
