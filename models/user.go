@@ -74,3 +74,30 @@ func (u *User) ValidateCredentials() error {
 
 	return nil
 }
+
+func GetRegisteredUsersForEvent(eventID int64) (*[]User, error) {
+	query := `SELECT u.id, u.email FROM users u
+	JOIN registrations r ON u.id = r.user_id
+	WHERE r.event_id = ?`
+
+	rows, err := db.DB.Query(query, eventID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var users []User
+	for rows.Next() {
+		var user User
+		err := rows.Scan(&user.ID, &user.Email)
+		if err != nil {
+			return nil, err
+		}
+		users = append(users, user)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return &users, nil
+}

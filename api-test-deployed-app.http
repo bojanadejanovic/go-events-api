@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUBiaXRjcmFmdC5pbmciLCJleHAiOjE3NDYzNTc1MTEsInN1YiI6MH0.hzwcxtReAyw7szxSPTPpABpjc4rPsMO1XtW9hFfqJvA
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUBiaXRjcmFmdC5pbmciLCJleHAiOjE3NDYzNTgxODcsInVzZXJJRCI6M30.kah4i4FgHMSMQmc1bL8EZZkj8uTH3DP5ShcIAB8bwxc
 
 
 ### get events
@@ -19,7 +19,8 @@ Authorization: Bearer {{token}}
 }
 
 ### Update event
-PUT https://go-events.bitsandpieces.cloud/events/1
+PUT https://go-events.bitsandpieces.cloud/events/11
+Authorization: Bearer {{token}}
 
 {
   "name": "Meditacija",
@@ -48,6 +49,6 @@ POST https://go-events.bitsandpieces.cloud/login
 }
 
 ### register for event
-POST http://localhost:8080/events/6/register
+POST https://go-events.bitsandpieces.cloud/events/12/register
 Content-Type: application/json
 Authorization: Bearer {{token}}

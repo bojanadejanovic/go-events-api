@@ -1,3 +1,6 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjM1OTEwMywidXNlcklEIjoxfQ.P0ViPG9wSVsVjnSN6Raow9zo_nQMBhsItiqEM8d7Rz8
+
+
 ### Get all events
 GET http://localhost:8080/events 
 Content-Type: application/json
@@ -65,3 +68,7 @@ DELETE http://localhost:8080/events/6/register
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NjU2NCwidXNlcklEIjoxfQ.4pCMEEOpO8IDYY3hslWthQ1A77ehYlKLwoFwox731jY
 
+### get registered users
+GET http://localhost:8080/events/6/registered
+Content-Type: application/json
+Authorization: Bearer {{token}}
