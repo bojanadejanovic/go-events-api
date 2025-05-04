@@ -1,3 +1,5 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUBiaXRjcmFmdC5pbmciLCJleHAiOjE3NDYzNTc1MTEsInN1YiI6MH0.hzwcxtReAyw7szxSPTPpABpjc4rPsMO1XtW9hFfqJvA
+
 
 ### get events
 GET https://go-events.bitsandpieces.cloud/events
@@ -7,11 +9,12 @@ GET https://go-events.bitsandpieces.cloud/events/1
 
 ### create event
 POST https://go-events.bitsandpieces.cloud/events
+Authorization: Bearer {{token}}
 
 {
-  "name": "Vjezbe",
-  "description": "Vjezbe",
-  "date_time": "2025-05-02T11:00:00Z",
+  "name": "Popiti vode",
+  "description": "Popiti vode",
+  "date_time": "2025-05-04T11:00:00Z",
   "location": "Sala 1"
 }
 
@@ -43,3 +46,8 @@ POST https://go-events.bitsandpieces.cloud/login
   "email": "bojana@bitcraft.ing",
   "password": "Sof1st1c1r4n!"
 }
+
+### register for event
+POST http://localhost:8080/events/6/register
+Content-Type: application/json
+Authorization: Bearer {{token}}

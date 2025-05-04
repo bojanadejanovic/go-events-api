@@ -6,12 +6,13 @@ Content-Type: application/json
 ### Create a new event
 POST http://localhost:8080/events 
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NjI5NywidXNlcklEIjoxfQ.o80KFGBm6tDN1pZ1bN2HyUryqBlV6K2a-LP1M4fffqw
 
 {
-  "name": "Test 111",
-  "description": "Test test 11",
-  "date_time": "2025-05-01T11:00:00Z",
-  "location": "Sala 1"
+  "name": "Predavanja  1",
+  "description": "Predavanja 11",
+  "date_time": "2025-05-03T11:00:00Z",
+  "location": "Sala 2"
 }
 
 
@@ -20,8 +21,9 @@ GET http://localhost:8080/events/2
 Content-Type: application/json
 
 ### Update an event
-PUT http://localhost:8080/events/2
+PUT http://localhost:8080/events/6
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuamljYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NTI4OSwidXNlcklEIjo0fQ.JIKHr85xfOijdoBhQusSckc9Q50hXscquXMzQAUoiCs
 
 {
   "name": "Meditacija",
@@ -31,16 +33,16 @@ Content-Type: application/json
 }
 
 ### Delete an event
-DELETE http://localhost:8080/events/81
+DELETE http://localhost:8080/events/3
 Content-Type: application/json
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuamljYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NTI4OSwidXNlcklEIjo0fQ.JIKHr85xfOijdoBhQusSckc9Q50hXscquXMzQAUoiCs
 
 ### sign up user
 POST http://localhost:8080/signup
 Content-Type: application/json
 
 {
-  "email": "test@bojana.com",
+  "email": "bojana@test.com",
   "password": "test123"
 }
 
@@ -49,6 +51,17 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email": "test@bojana.com",
+  "email": "bojana@test.com",
   "password": "test123"
 }
+
+### register for event
+POST http://localhost:8080/events/6/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NjU2NCwidXNlcklEIjoxfQ.4pCMEEOpO8IDYY3hslWthQ1A77ehYlKLwoFwox731jY
+
+### cancel registration
+DELETE http://localhost:8080/events/6/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NjU2NCwidXNlcklEIjoxfQ.4pCMEEOpO8IDYY3hslWthQ1A77ehYlKLwoFwox731jY
+
