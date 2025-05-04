@@ -8,8 +8,7 @@ Content-Type: application/json
 ### Create a new event
 POST http://localhost:8080/events 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NjI5NywidXNlcklEIjoxfQ.o80KFGBm6tDN1pZ1bN2HyUryqBlV6K2a-LP1M4fffqw
-
+Authorization: Bearer {{token}}
 {
   "name": "Predavanja  1",
   "description": "Predavanja 11",
@@ -25,8 +24,7 @@ Content-Type: application/json
 ### Update an event
 PUT http://localhost:8080/events/6
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuamljYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NTI4OSwidXNlcklEIjo0fQ.JIKHr85xfOijdoBhQusSckc9Q50hXscquXMzQAUoiCs
-
+Authorization: Bearer {{token}}
 {
   "name": "Meditacija",
   "description": "Meditacija",
@@ -37,7 +35,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuamljY
 ### Delete an event
 DELETE http://localhost:8080/events/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuamljYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NTI4OSwidXNlcklEIjo0fQ.JIKHr85xfOijdoBhQusSckc9Q50hXscquXMzQAUoiCs
+Authorization: Bearer {{token}}
 
 ### sign up user
 POST http://localhost:8080/signup
@@ -60,12 +58,12 @@ Content-Type: application/json
 ### register for event
 POST http://localhost:8080/events/6/register
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NjU2NCwidXNlcklEIjoxfQ.4pCMEEOpO8IDYY3hslWthQ1A77ehYlKLwoFwox731jY
+Authorization: Bearer {{token}}
 
 ### cancel registration
 DELETE http://localhost:8080/events/6/register
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvamFuYUB0ZXN0LmNvbSIsImV4cCI6MTc0NjI3NjU2NCwidXNlcklEIjoxfQ.4pCMEEOpO8IDYY3hslWthQ1A77ehYlKLwoFwox731jY
+Authorization: Bearer {{token}}
 
 ### get registered users
 GET http://localhost:8080/events/8/registered
