@@ -27,6 +27,9 @@ func GenerateToken(userID int64, email string) (string, error) {
 			return "", fmt.Errorf("JWT_SECRET environment variable not set")
 		}
 	}
+	if secret != "" {
+		fmt.Println("secret retrieved")
+	}
 	return token.SignedString([]byte(secret))
 }
 

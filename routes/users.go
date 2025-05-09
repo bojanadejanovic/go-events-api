@@ -40,6 +40,7 @@ func login(context *gin.Context) {
 
 	err := user.ValidateCredentials()
 	if err != nil {
+		fmt.Println("error validating credentials: ", err)
 		context.JSON(http.StatusUnauthorized, gin.H{"message": err.Error()})
 		return
 	}
@@ -53,6 +54,7 @@ func login(context *gin.Context) {
 
 	login, err := models.SaveLogin(user.ID, token)
 	if err != nil {
+		fmt.Println("Error saving login: ", err)
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to save login"})
 		return
 	}
