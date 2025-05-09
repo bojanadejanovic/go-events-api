@@ -83,7 +83,6 @@ func GetUserByEmail(email string) (*User, error) {
 			// Return an empty user and no error if no rows are found
 			return &User{}, nil
 		}
-		fmt.Println(err)
 		return &User{}, err
 	}
 
