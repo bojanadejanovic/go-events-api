@@ -53,15 +53,6 @@ func createTables() {
 		panic("Could not create events table: " + err.Error())
 	}
 
-	createRegistrationsTable := `
-	CREATE TABLE IF NOT EXISTS registrations (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		event_id INTEGER,
-		user_id INTEGER,
-		FOREIGN KEY(event_id) REFERENCES events(id),
-		FOREIGN KEY(user_id) REFERENCES users(id)
-	)`
-
 	createLoginsTable := `
 	CREATE TABLE IF NOT EXISTS logins (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -72,15 +63,25 @@ func createTables() {
 		FOREIGN KEY(user_id) REFERENCES users(id)
 	)`
 
+	_, err = DB.Exec(createLoginsTable)
+	if err != nil {
+		panic("Could not create logins table: " + err.Error())
+	}
+
+	createRegistrationsTable := `
+	CREATE TABLE IF NOT EXISTS registrations (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		event_id INTEGER,
+		user_id INTEGER,
+		FOREIGN KEY(event_id) REFERENCES events(id),
+		FOREIGN KEY(user_id) REFERENCES users(id)
+	)`
+
 	_, err = DB.Exec(createRegistrationsTable)
 	if err != nil {
 		panic("Could not create registrations table: " + err.Error())
 	}
 
-	_, err = DB.Exec(createLoginsTable)
-	if err != nil {
-		panic("Could not create logins table: " + err.Error())
-	}
 }
 
 func IsUserLoggedIn(userID int64) (bool, error) {
@@ -116,14 +117,5 @@ func IsUserLoggedIn(userID int64) (bool, error) {
 func LogoutUser(userID int64) error {
 	query := `DELETE FROM logins WHERE user_id = ?`
 	_, err := DB.Exec(query, userID)
-	return err
-}
-
-func LoginUser(userID int64, token string, expiresAt time.Time) error {
-	query := `
-		INSERT INTO logins (user_id, token, created_at, expires_at)
-		VALUES (?, ?, datetime('now'), ?)`
-
-	_, err := DB.Exec(query, userID, token, expiresAt)
 	return err
 }

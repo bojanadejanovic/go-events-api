@@ -27,3 +27,6 @@ go.work.sum
 
 # api test file
 api-test-deployed-app.http
+
+# local db
+api.db
