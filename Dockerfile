@@ -33,8 +33,6 @@ WORKDIR /app
 
 # Copy the binary from builder
 COPY --from=builder /app/api .
-# Copy the database file
-COPY api.db .
 
 # Expose port
 EXPOSE 8080
