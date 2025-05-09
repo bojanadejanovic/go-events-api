@@ -33,6 +33,7 @@ func SaveLogin(userID int64, token string) (*Login, error) {
 	expiresAt := now.Add(1 * time.Hour) // Set expires_at to +1 hour from now
 	result, err := stmt.Exec(userID, hashedToken, now, expiresAt)
 	if err != nil {
+		fmt.Println(err)
 		return nil, err
 	}
 
@@ -98,6 +99,7 @@ func (u *User) ValidateCredentials() error {
 	err := row.Scan(&u.ID, &retrievedPassword)
 
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 

@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 
 	"bojana.dev/api/models"
@@ -44,6 +45,7 @@ func login(context *gin.Context) {
 	}
 
 	token, err := utils.GenerateToken(user.ID, user.Email)
+	fmt.Println(err)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to authenticate user"})
 		return
