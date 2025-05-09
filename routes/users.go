@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 
 	"bojana.dev/api/models"
@@ -16,7 +17,9 @@ func signup(context *gin.Context) {
 	}
 
 	existingUser, err := models.GetUserByEmail(user.Email)
-	if err == nil && existingUser.ID != 0 {
+	fmt.Println(err)
+	fmt.Println(existingUser)
+	if err != nil || existingUser.ID != 0 {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "User with this email already exists"})
 		return
 	}

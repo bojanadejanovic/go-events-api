@@ -1,6 +1,7 @@
 package models
 
 import (
+	"database/sql"
 	"errors"
 	"fmt"
 	"time"
@@ -21,14 +22,16 @@ type Login struct {
 }
 
 func SaveLogin(userID int64, token string) (*Login, error) {
-	query := `INSERT INTO logins(user_id, token, created_at) VALUES (?, ?, ?)`
+	query := `INSERT INTO logins(user_id, token, created_at, expires_at) VALUES (?, ?, ?, ?)`
 	stmt, err := db.DB.Prepare(query)
 	if err != nil {
 		return nil, err
 	}
 	defer stmt.Close()
 	hashedToken := utils.HashToken(token)
-	result, err := stmt.Exec(userID, hashedToken, time.Now())
+	now := time.Now()
+	expiresAt := now.Add(1 * time.Hour) // Set expires_at to +1 hour from now
+	result, err := stmt.Exec(userID, hashedToken, now, expiresAt)
 	if err != nil {
 		return nil, err
 	}
@@ -76,11 +79,12 @@ func GetUserByEmail(email string) (*User, error) {
 	var user User
 	err := row.Scan(&user.ID, &user.Email, &user.Password)
 	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			// Return an empty user and no error if no rows are found
+			return &User{}, nil
+		}
+		fmt.Println(err)
 		return &User{}, err
-	}
-
-	if user.ID == 0 {
-		return &User{}, fmt.Errorf("user with email %s not found", email)
 	}
 
 	return &user, nil
